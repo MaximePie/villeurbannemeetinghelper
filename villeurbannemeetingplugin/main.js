@@ -2,6 +2,7 @@ console.log("Loading");
 
 const URL = "https://mairie-meeting.herokuapp.com";
 
+let repetitionDelay = 60000;
 setInterval(() => {
   document.getElementById("anchorCal")?.click();
 
@@ -17,4 +18,4 @@ setInterval(() => {
   else {
     fetch(`${URL}/meetingGone`)
   }
-}, 20000)
+}, repetitionDelay)
