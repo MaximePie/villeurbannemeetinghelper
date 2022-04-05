@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Tuto WebSocket avec Socket.io et NodeJS par PracticalProgramming.fr</title>
+</head>
+
+<body>
+<H1>Hello</H1>
+
+<div>
+  <p>On teste, on teste ...</p>
+  <div id="dateContainer"></div>
+</div>
+
+<!-- CREATION SOCKET -->
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  const socket = io();
+
+  const dateContainerElement = document.getElementById("dateContainer");
+
+  // écoute du socket news
+  socket.on('found', function(msg){
+    const newDate = document.createElement("p");
+    newDate.innerHTML = msg;
+    newDate.style.color = "red";
+    newDate.style.fontSize = "3em";
+
+    dateContainerElement.appendChild(newDate);
+  });
+
+  // écoute du socket news
+  socket.on('gone', function(msg){
+    dateContainerElement.innerHTML = null;
+  });
+</script>
+
+<!-- FIN CODE SOCKET -->
+</body>
+</html>
