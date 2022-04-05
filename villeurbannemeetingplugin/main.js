@@ -3,11 +3,9 @@ console.log("Loading");
 const URL = "https://mairie-meeting.herokuapp.com";
 
 setInterval(() => {
-  console.log("Fetching");
   document.getElementById("anchorCal")?.click();
 
   const selectDayAvailable = document.querySelector('[data-handler=selectDay]');
-  console.log(selectDayAvailable);
   if (selectDayAvailable) {
     // A day has been found !!
 
@@ -19,4 +17,4 @@ setInterval(() => {
   else {
     fetch(`${URL}/meetingGone`)
   }
-}, 5000)
+}, 20000)

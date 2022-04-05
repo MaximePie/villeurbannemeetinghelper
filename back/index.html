@@ -18,7 +18,7 @@
 <script src="/socket.io/socket.io.js"></script>
 <script>
   const socket = io();
-
+  const onFoundSoundEffect = new Audio('./coucou-dobby.mp3');
   const dateContainerElement = document.getElementById("dateContainer");
 
   // écoute du socket news
@@ -27,15 +27,13 @@
     newDate.innerHTML = msg;
     newDate.style.color = "red";
     newDate.style.fontSize = "3em";
-
-    console.log(msg);
+    onFoundSoundEffect.play();
 
     dateContainerElement.appendChild(newDate);
   });
 
   // écoute du socket news
   socket.on('gone', function(msg){
-    console.log(msg);
     dateContainerElement.innerHTML = null;
   });
 </script>

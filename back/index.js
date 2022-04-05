@@ -36,7 +36,7 @@ app.get("/meetingFound", async (req, res) => {
 
 app.get('/meetingGone', async (request, response) => {
   console.log("Meeting found !");
-  io.emit('gone')
+  io.emit('gone', "It's gone...");
   response.json({message: "it's gone. :("})
 })
 
