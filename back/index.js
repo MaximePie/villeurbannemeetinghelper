@@ -1,6 +1,8 @@
 const express = require('express');
+require('dotenv').config()
 const cors = require('cors');
 const app = express();
+
 const server = require('http').Server(app)
 const io = require('socket.io')(server)
 
@@ -35,5 +37,5 @@ app.get('/meetingGone', async (request, response) => {
   response.json({message: "it's gone. :("})
 })
 
-server.listen(5000)
+server.listen(process.env.PORT || 5000)
 
