@@ -12,14 +12,26 @@
 <div>
   <p>On teste, on teste ...</p>
   <div id="dateContainer"></div>
+  <button id="enable">Activer les notifications</button>
 </div>
 
 <!-- CREATION SOCKET -->
 <script src="/socket.io/socket.io.js"></script>
 <script>
   const socket = io();
-  const onFoundSoundEffect = new Audio('./coucou-dobby.mp3');
+  const onFoundSoundEffect = new Audio('https://docs.google.com/uc?export=download&id=1hWO5BFn_oeLvjcmU-gam3ELqxbzz1yTr');
   const dateContainerElement = document.getElementById("dateContainer");
+  let currentNotification;
+
+  document.getElementById("enable").addEventListener("click", () => {
+    Notification.requestPermission().then(askNotificationPermission);
+  })
+
+  function createNotification(date) {
+    const img = 'https://i.ibb.co/0ZjPXJY/notification.jpg';
+    const text = `Pour le ${date}`;
+    currentNotification = new Notification('Nouvelle date trouvée !', { body: text, icon: img });
+  }
 
   // écoute du socket news
   socket.on('found', function(msg){
@@ -30,12 +42,44 @@
     onFoundSoundEffect.play();
 
     dateContainerElement.appendChild(newDate);
+    createNotification(msg);
   });
 
   // écoute du socket news
   socket.on('gone', function(msg){
     dateContainerElement.innerHTML = null;
+    currentNotification?.close();
   });
+
+
+  function askNotificationPermission() {
+
+    // La fonction qui sert effectivement à demander la permission
+    function handlePermission(permission) {
+      // On affiche ou non le bouton en fonction de la réponse
+      if(Notification.permission === 'denied' || Notification.permission === 'default') {
+        notificationBtn.style.display = 'block';
+      } else {
+        notificationBtn.style.display = 'none';
+      }
+    }
+
+    // Vérifions si le navigateur prend en charge les notifications
+    if (!('Notification' in window)) {
+      console.log("Ce navigateur ne prend pas en charge les notifications.");
+    } else {
+      if(checkNotificationPromise()) {
+        Notification.requestPermission()
+          .then((permission) => {
+            handlePermission(permission);
+          })
+      } else {
+        Notification.requestPermission(function(permission) {
+          handlePermission(permission);
+        });
+      }
+    }
+  }
 </script>
 
 <!-- FIN CODE SOCKET -->
