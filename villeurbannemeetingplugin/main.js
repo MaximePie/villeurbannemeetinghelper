@@ -1,5 +1,7 @@
 console.log("Loading");
 
+const URL = "https://mairie-meeting.herokuapp.com/";
+
 setInterval(() => {
   console.log("Fetching");
   document.getElementById("anchorCal")?.click();
@@ -12,9 +14,9 @@ setInterval(() => {
     const month = selectDayAvailable.dataset.month;
     const day = selectDayAvailable.firstChild?.innerHTML;
 
-    fetch(`http://localhost:5000/meetingFound?day=${day}&month=${month}`)
+    fetch(`${URL}/meetingFound?day=${day}&month=${month}`)
   }
   else {
-    fetch(`http://localhost:5000/meetingGone`)
+    fetch(`${URL}/meetingGone`)
   }
 }, 5000)
