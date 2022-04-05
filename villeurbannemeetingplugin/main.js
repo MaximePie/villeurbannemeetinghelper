@@ -1,6 +1,6 @@
 console.log("Loading");
 
-const URL = "https://mairie-meeting.herokuapp.com/";
+const URL = "https://mairie-meeting.herokuapp.com";
 
 setInterval(() => {
   console.log("Fetching");
