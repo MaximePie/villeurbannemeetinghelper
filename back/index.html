@@ -28,11 +28,14 @@
     newDate.style.color = "red";
     newDate.style.fontSize = "3em";
 
+    console.log(msg);
+
     dateContainerElement.appendChild(newDate);
   });
 
   // écoute du socket news
   socket.on('gone', function(msg){
+    console.log(msg);
     dateContainerElement.innerHTML = null;
   });
 </script>

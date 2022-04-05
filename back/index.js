@@ -28,11 +28,14 @@ app.get("/meetingFound", async (req, res) => {
   date.setMonth(month);
   date.setDate(day);
 
+  console.log("Meeting found !");
+
   io.emit('found', date)
   res.json({message: "ok, ok"})
 })
 
 app.get('/meetingGone', async (request, response) => {
+  console.log("Meeting found !");
   io.emit('gone')
   response.json({message: "it's gone. :("})
 })
